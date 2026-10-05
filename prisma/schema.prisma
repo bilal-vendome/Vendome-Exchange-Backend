@@ -1,0 +1,35 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlserver"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id        String   @id @default(uuid())
+  email     String   @unique
+  password  String
+  role      String   @default("USER")
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Complaint {
+  id                String   @id @default(uuid())
+  referenceNumber   String   @unique
+  fullName          String
+  email             String
+  phoneNumber       String
+  address           String
+  complaintType     String
+  dateOfIncident    DateTime
+  description       String
+  desiredResolution String?
+  acknowledgment    Boolean
+  consent           Boolean
+  status            String   @default("PENDING")
+  createdAt         DateTime @default(now())
+  updatedAt         DateTime @updatedAt
+}

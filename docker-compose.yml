@@ -1,0 +1,29 @@
+version: '3.8'
+
+services:
+  sqlserver:
+    image: mcr.microsoft.com/mssql/server:2022-latest
+    container_name: mssql_container
+    environment:
+      - ACCEPT_EULA=Y
+      - SA_PASSWORD=StrongPass123!
+      - MSSQL_PID=Express
+    ports:
+      - "1433:1433"
+    volumes:
+      - mssql_data:/var/opt/mssql
+    restart: always
+
+  backend:
+    build: .
+    container_name: vendome-exchange-backend_container
+    ports:
+      - "3000:3000"
+    environment:
+      - DATABASE_URL=sqlserver://sqlserver:1433;database=master;user=sa;password=StrongPass123!;encrypt=true;trustServerCertificate=true
+    depends_on:
+      - sqlserver
+    restart: always
+
+volumes:
+  mssql_data:
