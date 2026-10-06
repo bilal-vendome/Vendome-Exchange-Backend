@@ -49,11 +49,5 @@ async function bootstrap() {
   logger.log(`🚀 DB Server is running on: ${process.env.DATABASE_URL}`);
   logger.log(`🚀 Application is running on: http://localhost:${port}`);
   logger.log(`📚 API Documentation available at: http://localhost:${port}/api-docs`);
-
-  function run() {
-    const langCode = "fr";
-    const displayNames = new Intl.DisplayNames([langCode], { type: 'language' });
-    console.log({ value: displayNames.of(langCode) })
-  } run();
 }
 bootstrap();
