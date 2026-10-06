@@ -15,7 +15,6 @@ export class UserService {
   async create(createUserDto: CreateUserDto) {
     const { email, password, role } = createUserDto;
 
-    // Check if user already exists
     const existingUser = await this.prisma.user.findUnique({
       where: { email },
     });
@@ -24,7 +23,6 @@ export class UserService {
       throw new ConflictException('User with this email already exists');
     }
 
-    // Hash password
     const saltRounds = this.configService.get<number>('bcrypt.saltRounds') || 10;
     const hashedPassword = await bcrypt.hash(password, saltRounds);
 
@@ -80,7 +78,6 @@ export class UserService {
   async update(id: string, updateUserDto: UpdateUserDto) {
     const { email, password, role } = updateUserDto;
 
-    // Check if user exists
     const existingUser = await this.prisma.user.findUnique({
       where: { id },
     });
@@ -89,7 +86,6 @@ export class UserService {
       throw new NotFoundException(`User with ID ${id} not found`);
     }
 
-    // Check if email is being changed and if it's already taken
     if (email && email !== existingUser.email) {
       const emailTaken = await this.prisma.user.findUnique({
         where: { email },
@@ -100,7 +96,6 @@ export class UserService {
       }
     }
 
-    // Hash password if provided
     let hashedPassword = existingUser.password;
     if (password) {
       const saltRounds = this.configService.get<number>('bcrypt.saltRounds') || 10;
@@ -127,7 +122,6 @@ export class UserService {
   }
 
   async remove(id: string) {
-    // Check if user exists
     const existingUser = await this.prisma.user.findUnique({
       where: { id },
     });

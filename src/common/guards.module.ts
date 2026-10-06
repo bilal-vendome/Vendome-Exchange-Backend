@@ -4,7 +4,7 @@ import { RolesGuard } from './guards/roles.guard';
 import { AuthModule } from '../modules/auth/auth.module';
 
 @Module({
-  imports: [AuthModule], // <-- Imports AuthModule instead of raw PassportModule registration
+  imports: [AuthModule],
   providers: [JwtAuthGuard, RolesGuard],
   exports: [JwtAuthGuard, RolesGuard],
 })

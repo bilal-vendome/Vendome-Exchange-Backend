@@ -34,6 +34,6 @@ import { LocalStrategy } from './strategies/local.strategy';
   ],
   controllers: [AuthController],
   providers: [AuthService, JwtStrategy, LocalStrategy],
-  exports: [AuthService, PassportModule], // <-- Crucial: Export PassportModule here
+  exports: [AuthService, PassportModule],
 })
 export class AuthModule {}

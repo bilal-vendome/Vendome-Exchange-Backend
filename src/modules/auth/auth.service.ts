@@ -18,7 +18,6 @@ export class AuthService {
   async signup(signupDto: SignupDto) {
     const { email, password, role } = signupDto;
 
-    // Check if user already exists
     const existingUser = await this.prisma.user.findUnique({
       where: { email },
     });
@@ -27,11 +26,9 @@ export class AuthService {
       throw new ConflictException('User with this email already exists');
     }
 
-    // Hash password
     const saltRounds = this.configService.get<number>('bcrypt.saltRounds') || 10;
     const hashedPassword = await bcrypt.hash(password, saltRounds);
 
-    // Create user
     const user = await this.prisma.user.create({
       data: {
         email,
