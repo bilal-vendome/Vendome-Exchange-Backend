@@ -9,8 +9,8 @@ import { EmailService } from './email.service';
       imports: [ConfigModule],
       useFactory: async (configService: ConfigService) => ({
         transport: {
-          host: configService.get<string>('mail.host') || 'smtp.gmail.com',
-          port: configService.get<number>('mail.port') || 587,
+          host: configService.get<string>('mail.host') || 'sandbox.smtp.mailtrap.io',
+          port: configService.get<number>('mail.port') || 2525,
           secure: false,
           auth: {
             user: configService.get<string>('mail.user'),
@@ -18,7 +18,7 @@ import { EmailService } from './email.service';
           },
         },
         defaults: {
-          from: configService.get<string>('mail.from') || 'noreply@domain.com',
+          from: configService.get<string>('mail.from') || 'noreply.vendome@yopmail.digital',
         },
       }),
       inject: [ConfigService],

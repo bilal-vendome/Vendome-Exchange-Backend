@@ -5,6 +5,7 @@ import { SwaggerModule, DocumentBuilder } from '@nestjs/swagger';
 import helmet from 'helmet';
 import { AppModule } from './app.module';
 import { HttpExceptionFilter } from './common/filters/http-exception.filter';
+import {run} from "./run";
 
 async function bootstrap() {
   const logger = new Logger('Bootstrap');
@@ -49,5 +50,7 @@ async function bootstrap() {
   logger.log(`🚀 DB Server is running on: ${process.env.DATABASE_URL}`);
   logger.log(`🚀 Application is running on: http://localhost:${port}`);
   logger.log(`📚 API Documentation available at: http://localhost:${port}/api-docs`);
+
+  // run()
 }
 bootstrap();

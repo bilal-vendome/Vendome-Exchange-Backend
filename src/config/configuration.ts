@@ -19,12 +19,12 @@ export const configuration = () => {
       limit: parseInt(process.env.THROTTLE_LIMIT || '10', 10),
     },
     mail: {
-      host: process.env.MAIL_HOST || 'smtp.gmail.com',
-      port: parseInt(process.env.MAIL_PORT || '587', 10),
+      host: process.env.MAIL_HOST || 'sandbox.smtp.mailtrap.io',
+      port: parseInt(process.env.MAIL_PORT || '2525', 10),
       user: process.env.MAIL_USER,
       password: process.env.MAIL_PASSWORD,
-      from: process.env.MAIL_FROM || 'noreply@domain.digital',
-      supportEmail: process.env.SUPPORT_EMAIL || 'support@domain.digital',
+      from: process.env.MAIL_FROM || 'noreply.vendome@yopmail.digital',
+      supportEmail: process.env.SUPPORT_EMAIL || 'support.vendome@yopmail.digital',
     },
   };
 };
@@ -38,8 +38,8 @@ export const validationSchema = Joi.object({
   BCRYPT_SALT_ROUNDS: Joi.number().default(10),
   THROTTLE_TTL: Joi.number().default(60),
   THROTTLE_LIMIT: Joi.number().default(10),
-  MAIL_HOST: Joi.string().default('smtp.gmail.com'),
-  MAIL_PORT: Joi.number().default(587),
+  MAIL_HOST: Joi.string().default('sandbox.smtp.mailtrap.io'),
+  MAIL_PORT: Joi.number().default(2525),
   MAIL_USER: Joi.string().when('NODE_ENV', {
     is: 'production',
     then: Joi.required(),

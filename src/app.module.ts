@@ -7,6 +7,7 @@ import { AuthModule } from './modules/auth/auth.module';
 import { UserModule } from './modules/user/user.module';
 import { ComplaintModule } from './modules/complaint/complaint.module';
 import { EmailModule } from './modules/email/email.module';
+import { PolicyModule } from './modules/policy/policy.module';
 
 @Module({
   imports: [
@@ -14,6 +15,7 @@ import { EmailModule } from './modules/email/email.module';
     PrismaModule,
     EmailModule,
     ComplaintModule,
+    PolicyModule,
     // AuthModule,
     // UserModule,
   ],
